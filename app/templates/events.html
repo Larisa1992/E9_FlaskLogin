@@ -1,0 +1,38 @@
+<html>
+     <head>
+     </head>
+     <body>
+     <div class="formwrapper">
+	    <h2 class="title">Create Events</h2>
+		
+		{% for category, message in  get_flashed_messages(with_categories=true) %}
+		<spam class="{{ category }}">{{ message }}</spam>
+    	{% endfor %}
+
+		<form method="POST" action="/add_event" enctype="multipart/form-data">
+			{{ form.csrf_token }}
+		<div class="form-field">
+			{{ form.author.label }}
+			{{ form.author }}
+		</div>
+		<div class="form-field">
+			{{ form.from_date.label }}
+			{{ form.from_date }}
+		</div>
+		<div class="form-field">
+			{{ form.to_date.label }}
+			{{ form.to_date }}
+		</div>
+		<div class="form-field">
+			{{ form.theme.label }}
+			{{ form.theme }}
+		</div>
+		<div class="form-field" >
+			{{ form.description.label }}
+			{{ form.description }}
+		</div>
+		<input type="submit" value="Создать">
+	    </form>
+     </div>
+</body>
+</html>

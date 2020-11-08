@@ -1,0 +1,41 @@
+<html>
+   <head>
+       <title>List Events</title>
+   </head>
+   <body>
+    <h1>Events</h1>
+
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+
+    {% for ev in  object_list %}
+    
+    <h4>Тема: {{ ev.theme }}</h4>
+        Автор: {{ ev.author }}
+        Дата с: {{ ev.from_date }}
+        Дата по: {{ ev.to_date }}
+    <button>Детальнее</button>
+
+    {% endfor %}
+
+    <table border="1">
+		<tr>
+			<th> author </th>
+			<th>from_date</th>
+            <th>to_date</th>
+            <th>theme</th>
+            <th>description</th>
+		</tr>
+		{% for res in object_list %}	
+		<tr>
+			<td>{{ res.author }}</td>
+			<td>{{ res.from_date }}</td>
+            <td>{{ res.to_date.date }}</td>
+            <td>{{ res.theme }}</td>
+            <td>{{ description }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+   </body>
+</html>
