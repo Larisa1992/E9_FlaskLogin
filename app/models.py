@@ -1,14 +1,5 @@
-from app import db, login_manager
-
-class Event(db.Model):
-    __tablename__ = 'event'
-    _id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(100), unique=False, nullable=False)
-    from_date = db.Column(db.Date, unique=False, nullable=False)
-    to_date = db.Column(db.Date, unique=False, nullable=False)
-    theme = db.Column(db.String(80), unique=False, nullable=False)
-    description = db.Column(db.String(500), unique=False, nullable=False)
-    # user = db.Column(db.String(80), db.ForeignKey('user.id'))
+from app import db
+# , login_manager
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -23,11 +14,22 @@ class User(db.Model):
         return self.email
 
     def is_authenticated(self):
-        return True
-        # return self.authenticated
+        # return True
+        return self.authenticated
 
     def is_active(self):
         return True
   
     def is_anonymous(self):
         return False
+
+class Event(db.Model):
+    __tablename__ = 'event'
+    _id = db.Column(db.Integer, primary_key=True)
+    # author = db.Column(db.String(100), unique=False, nullable=False)
+    author = db.Column(db.String(100), db.ForeignKey('user.email'))
+    from_date = db.Column(db.Date, unique=False, nullable=False)
+    to_date = db.Column(db.Date, unique=False, nullable=False)
+    theme = db.Column(db.String(80), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=False)
+    # user = db.Column(db.String(80), db.ForeignKey('user.id'))

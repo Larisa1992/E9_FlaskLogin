@@ -5,8 +5,8 @@ from wtforms.validators import DataRequired, Email
 
 class EventsForm(FlaskForm):
     author = StringField('author')
-    from_date = DateField('from_date', format='%d-%m-%y', validators=[DataRequired()])
-    to_date = DateField('to_date', format='%d-%m-%y', validators=[DataRequired()])
+    from_date = DateField('from_date', format='%Y-%m-%d', validators=[DataRequired()])
+    to_date = DateField('to_date', format='%Y-%m-%d', validators=[DataRequired()])
     theme = StringField('theme')
     description = TextAreaField('description')
 

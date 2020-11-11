@@ -17,18 +17,23 @@
 
 {% if current_user.is_authenticated %}
 <ul>
-    <li>Email: {{ current_user.email }}</li>
-    Hi {{ current_user.email }}!
+    <li>Email current_user: {{ current_user.email }}</li>
 </ul>
 {% endif %}
 
 <div> <a href="/events_list">Просмотреть события всех пользователей</a></div>
-<div> <a href="/events_edit">Редактировать свои события</a></div>
+<div> <a href="/events_user">Редактировать свои события</a></div>
 <div> <a href="/add_event">Создать событие</a></div>
+
 <div> <a href="/create_user">Зарегистрироваться</a></div>
+
+{% if not current_user.is_authenticated %}
 <div> <a href="/login">Войти</a></div>
-{% if current_user.is_authenticated %}
-<div> <a href="/logout">Logout</a></div>
 {% endif %}
+
+{% if current_user.is_authenticated %}
+<div> <a href="/logout">Выйти</a></div>
+{% endif %}
+
 </body>
 </html>

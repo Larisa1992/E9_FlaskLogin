@@ -1,0 +1,33 @@
+<html>
+   <head>
+       <title>List Events</title>
+   </head>
+   <body>
+    <h1>Events</h1>
+
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+    
+    <form method="post" action="/events/{{ event._id }}/edit">
+        <P>
+            <label for="theme"> Theme</label>
+            <input name="theme" id="theme" value= "{{ event.theme }}">
+        </P>
+        <P>
+            <label for="from_date">From_date</label>
+            <input name="from_date" id="from_date" value= "{{ event.from_date }}" date="date">
+        </P>
+        <P>
+            <label for="to_date">To_date</label>
+            <input name="to_date" id="to_date" value= "{{ event.to_date }}" date="date">
+        </P>
+        <P>
+            <label for="description">Description</label>
+            <input name="description" id="description" value= "{{ event.description }}">
+        </P>
+        <input type="submit" value="Обновить">
+      </form>
+
+</body>
+</html>

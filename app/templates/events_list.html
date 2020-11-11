@@ -9,31 +9,25 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     </form>
 
-    {% for ev in  object_list %}
-    
-    <h4>Тема: {{ ev.theme }}</h4>
-        Автор: {{ ev.author }}
-        Дата с: {{ ev.from_date }}
-        Дата по: {{ ev.to_date }}
-    <button>Детальнее</button>
-
-    {% endfor %}
-
     <table border="1">
 		<tr>
 			<th> author </th>
-			<th>from_date</th>
-            <th>to_date</th>
             <th>theme</th>
-            <th>description</th>
+            <th>from_date</th>
+            <th>to_date</th>
+            <th>actions</th>
 		</tr>
 		{% for res in object_list %}	
 		<tr>
 			<td>{{ res.author }}</td>
-			<td>{{ res.from_date }}</td>
-            <td>{{ res.to_date.date }}</td>
             <td>{{ res.theme }}</td>
-            <td>{{ description }}</td>
+            <td>{{ res.from_date }}</td>
+            <td>{{ res.to_date }}</td>
+            <td>
+                {% if res.author == current_user.email %}
+                <a href="/events/{{ res._id }}"><button>Детальнее</button></a>
+                {% endif %}
+            </td>
 		</tr>
 		{% endfor %}
 	</table>

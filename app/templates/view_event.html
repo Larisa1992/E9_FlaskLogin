@@ -1,0 +1,20 @@
+<html>
+   <head>
+       <title>Details Events</title>
+   </head>
+   <body>
+    <h1>Details Event</h1>
+
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+    
+    <h4>Тема: {{ event.theme }}</h4>
+        <p>Автор: {{ event.author }}</p>
+        <p>Дата с: {{ event.from_date }}</p>
+        <p>Дата по: {{ event.to_date }}</p>
+        <p>Описание: {{ event.description }}</p>
+    <a href="/events/{{ event._id }}/edit"><button>Редактировать</button></a>
+    <a href="/events/{{ event._id }}/del"><button>Удалить</button></a>
+</body>
+</html>
