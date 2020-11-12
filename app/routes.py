@@ -10,16 +10,11 @@ from app.forms import EventsForm, CreateUserForm, LoginForm
 
 @login_manager.user_loader
 def user_loader(email):
-    print(f'email from rout')
-    print(f'email from rout {email}')
     return User.query.filter_by(email=email).first()
 
 @login_manager.request_loader
 def request_loader(request):
-    print(request)
     email = request.form.get('email')
-    print(f'request.form from request_loader {request.form}')
-    print(f'email from request_loader {email}')
     user = User.query.filter_by(email=email).first()
     if not user:
         return
@@ -46,9 +41,7 @@ def login():
                 db.session.add(curr_user)
                 db.session.commit()
 
-                login_user(curr_user, remember=True)
-
-                print('current_user.email login = ', current_user.email)        
+                login_user(curr_user, remember=True)     
                 return redirect("/")
             else:
                 flash('Email or password is not correct')
@@ -87,9 +80,7 @@ def logout():
 def add_event():
     events_form = EventsForm()
     if request.method == 'POST':
-
         if events_form.validate_on_submit():
-
             author = request.form.get('author')
             from_date = request.form.get('from_date')
             to_date = request.form.get('to_date')
@@ -141,7 +132,6 @@ def edit_event(_id):
 @login_required
 def delete_event(_id):
     del_event = Event.query.get_or_404(_id)
-    print(del_event.theme)
     try:
         db.session.delete(del_event)
         db.session.commit()
