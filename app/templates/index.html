@@ -22,11 +22,8 @@
 {% endif %}
 
 <div> <a href="/events_list">Просмотреть события всех пользователей</a></div>
-<div> <a href="/events_user">Редактировать свои события</a></div>
 <div> <a href="/add_event">Создать событие</a></div>
-
 <div> <a href="/create_user">Зарегистрироваться</a></div>
-
 {% if not current_user.is_authenticated %}
 <div> <a href="/login">Войти</a></div>
 {% endif %}

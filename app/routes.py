@@ -7,10 +7,6 @@ from app import app, db, bcrypt, login_manager
 from app.models import Event, User
 from app.forms import EventsForm, CreateUserForm, LoginForm
 
-# login_manager = LoginManager()
-# login_manager.login_view = 'login'
-# # login_manager.session_protection = 'strong'
-# login_manager.init_app(app)
 
 @login_manager.user_loader
 def user_loader(email):
@@ -53,7 +49,6 @@ def login():
                 login_user(curr_user, remember=True)
 
                 print('current_user.email login = ', current_user.email)        
-                # return redirect("/events_list")
                 return redirect("/")
             else:
                 flash('Email or password is not correct')
@@ -85,14 +80,12 @@ def logout():
     logout_user()
     return redirect('/login')
 
-# @csrf.exempt
 # для залогиненного пользователя доступна форма, которая позволяет добавить событие.
 # У события должны быть следующие параметры: автор, время начала, время конца, тема и описание
 @app.route('/add_event', methods=['POST', 'GET'])
 @login_required
 def add_event():
     events_form = EventsForm()
-    print(f'add_event request.method {request.method} ')
     if request.method == 'POST':
 
         if events_form.validate_on_submit():
@@ -103,7 +96,6 @@ def add_event():
             theme = request.form.get('theme')
             description = request.form.get('description')
             author = current_user.email
-            print(f'author {author}')
             ev = Event(author=author, from_date=from_date, to_date=to_date, theme=theme, description=description)
             db.session.add(ev)
             db.session.commit()
@@ -118,13 +110,6 @@ def add_event():
 def events_list():
     events = Event.query.order_by(Event.from_date).all()
     return render_template('events_list.html', object_list=events)
-
-# @app.route('/events_user')
-# def events_user():
-#     # events = Event.query.all(current_user.email)
-#     # events = db.session.query(Event).filter(author == current_user.email)
-#     events = Event.query.filter_by(author=current_user.email).all()
-#     return render_template('events_user.html', object_list=events)
 
 # Детальнее
 @app.route('/events/<int:_id>')
