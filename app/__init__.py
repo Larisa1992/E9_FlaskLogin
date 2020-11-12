@@ -15,8 +15,10 @@ from flask_bcrypt import Bcrypt
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Qetwr13)@localhost:5432/user_events'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Qetwr13)@localhost:5432/user_events'
     app.config.from_object(Config)
+    
+    # print("SQLALCHEMY_DATABASE_URI =", app.config['SQLALCHEMY_DATABASE_URI'])
     app.secret_key = os.urandom(32)
     app.debug = True
     csrf = CSRFProtect(app)
